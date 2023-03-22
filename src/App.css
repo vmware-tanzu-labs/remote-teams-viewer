@@ -1,0 +1,148 @@
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+table,
+th,
+td {
+  text-align: center;
+  padding: 0.5rem;
+  border: none;
+  border-collapse: collapse;
+  min-width: 75px;
+}
+
+h2,
+h4 {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #002538;
+  color: white;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+}
+
+.logo-image {
+  float: left;
+  width: 54px;
+  height: 54px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.logo-text {
+  float: right;
+}
+
+.theater-checkboxes {
+  min-width: 225px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Resize tooltip */
+.tooltip {
+  width: 240px;
+  min-height: 100px;
+}
+
+.tooltip-content {
+  height: 100px;
+  overflow-y: auto;
+  margin-top: 3%;
+}
+
+/* Overlay timezone cards and map */
+.overlay-timezone-cards {
+  position: absolute;
+  margin-top: 1%;
+  z-index: 500;
+}
+
+/* Timezone Card */
+.timezone-container {
+  position: absolute;
+  pointer-events: none;
+
+  width: 100%;
+  z-index: 500;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 2%;
+  background-color: white;
+}
+
+.timezone-card {
+  border-radius: 7%;
+  box-shadow: 5px 5px 5px #aaaaaa;
+  margin-top: 1%;
+  background-color: white;
+}
+
+/* Align timezone card title */
+.timezone-card-title {
+  text-align: center;
+  margin-top: 2%;
+}
+
+.timezone-card-table {
+  border: none;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leaflet-tooltip {
+  background-color: #313131;
+  color: #ffffff;
+  text-align: center;
+  border-color: #313131;
+  white-space: normal;
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: #313131;
+}
+
+.tooltip {
+  width: max-content;
+  min-height: auto;
+}
+
+/* WARNING: Leaflet requires CSS width AND height for map to show up */
+#map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  z-index: -1;
+}
