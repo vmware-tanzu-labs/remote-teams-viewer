@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+set -e
+
+. "$(dirname -- "$0")/_/husky.sh"
+
+cat "$(dirname -- "$0")/banner"
+echo "Running pre-push hook..."
+git fetch
+
+if ! git diff-index --quiet HEAD --; then
+  echo "Local changes found, please commit or stash"
+  exit 1
+fi
+
+if ! test -z "$(git ls-files --exclude-standard --others)"; then
+  echo "Untracked files, please commit or remove"
+  exit 1
+fi
+
+if ! git diff --quiet $(git branch --show-current)..origin/$(git branch --show-current) -- parser/; then
+  echo "Verifying Parser"
+  cd parser
+  echo "npm run test --passWithNoTests"
+  cd ..
+else
+  echo "No Changes detected in Parser, skipping verify"
+fi
+
+if ! git diff --quiet $(git branch --show-current)..origin/$(git branch --show-current) -- parser-cli/; then
+  echo "Verifying Parser-CLI"
+  cd parser-cli
+  echo "npm run test --passWithNoTests"
+  cd ..
+else
+  echo "No Changes detected in Parser-CLI, skipping verify"
+fi
+
+if ! git diff --quiet $(git branch --show-current)..origin/$(git branch --show-current) -- frontend/; then
+  echo "Verifying Frontend"
+  cd frontend
+  npm run test-and-build
+  cd ..
+else
+  echo "No Changes detected in Frontend, skipping verify"
+fi
+
