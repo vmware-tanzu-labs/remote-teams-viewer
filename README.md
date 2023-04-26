@@ -11,7 +11,7 @@ Read more about the VMware Tanzu Labs findings of remote working in the [blog po
 
 ---
 You can download the project and deploy an instance to an environment of your choice. Once the application is deployed and is accessible via your browser, you can:
-1.  Downlod the CSV template file
+1.  Download the CSV template file
 2.  Fill out the CSV file with your team members
 3.  Upload the CSV file to the application via the UI
 4.  Use the filters and search box on the UI to make have conversations and make decisions around healthier and more effective teams
