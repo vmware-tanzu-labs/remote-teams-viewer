@@ -1,0 +1,80 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fontsource/metropolis": "^4.5.3",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.3.0",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.16.1",
+    "@types/papaparse": "^5.3.7",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
+    "autosuggest-highlight": "^3.3.4",
+    "bootstrap": "^5.2.3",
+    "leaflet": "^1.8.0",
+    "lodash": "^4.17.21",
+    "nth-check": ">=2.0.1",
+    "oidc-client-ts": "^2.2.3",
+    "papaparse": "^5.4.1",
+    "parser": "file:../parser",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "react-oidc-context": "^2.2.2",
+    "react-scripts": "5.0.1",
+    "typescript": "^5.0.4",
+    "web-vitals": "^3.3.1"
+  },
+  "overrides": {
+    "autoprefixer": "10.4.5"
+  },
+  "scripts": {
+    "preinstall": "npm link ../parser --save",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!react-leaflet)/\" --runInBand",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .ts,.tsx --color --max-warnings 0 src && prettier --check src",
+    "lint:fix": "eslint --ext .ts,.tsx --color --max-warnings 0 --fix src  && prettier --write src",
+    "prepare": "npm run compile:parser && cd .. && husky install",
+    "test-and-build": "npm test -- --ci --watchAll=false --logHeapUsage && npm run build",
+    "update-dependencies": "updtr -t 'npm run test-and-build' --out",
+    "compile:parser": "cd ../parser && npm i && npm run compile",
+    "e2e": "REACT_APP_E2E_ENABLED=true react-scripts start",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/autosuggest-highlight": "^3.2.0",
+    "@types/leaflet": "^1.9.3",
+    "@types/lodash": "^4.14.194",
+    "cypress": "^12.11.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest-dom": "^4.0.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-testing-library": "^5.10.3",
+    "husky": "^8.0.3",
+    "nth-check": ">=2.0.1",
+    "prettier": "^2.8.8",
+    "updtr": "^4.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+/*
+ * Copyright 2022-2023 VMware, Inc.
+ * SPDX-License-Identifier: MIT
+ */
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:

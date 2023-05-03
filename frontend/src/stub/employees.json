@@ -1,0 +1,26 @@
+[
+    {
+        "employeeFirstName": "John",
+        "employeeLastName": "D**",
+        "role": "Eng",
+        "level": "P4",
+        "office": "Boston",
+        "theater": "East"
+    },
+    {
+        "employeeFirstName": "Jane",
+        "employeeLastName": "D**",
+        "role": "PM",
+        "level": "P5",
+        "office": "Boston",
+        "theater": "East"
+    },
+    {
+        "employeeFirstName": "Bob",
+        "employeeLastName": "M*****",
+        "role": "Des",
+        "level": "P3",
+        "office": "Boston",
+        "theater": "East"
+    }
+]

@@ -1,0 +1,105 @@
+#
+#  Copyright Notice
+#  Copyright 2022-2023 VMware, Inc.
+#  SPDX-License-Identifier: MIT
+#
+  ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remote-teams-viewer-internal-deployment
+spec:
+  selector:
+    matchLabels:
+      app: remote-teams-viewer-internal
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: remote-teams-viewer-internal
+    spec:
+      containers:
+      - name: remote-teams-viewer-internal
+        image: {{FULL_IMAGE_NAME}}
+        ports:
+        - containerPort: 80
+          name: http
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "100m"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: remote-teams-viewer-internal-service
+  labels:
+    app: remote-teams-viewer-internal
+spec:
+  selector:
+    app: remote-teams-viewer-internal
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: remote-teams-viewer-internal-ingress
+  labels:
+    app: remote-teams-viewer-internal
+spec:
+  rules:
+    # Pick the domain based on the DECC cluster for your namespace from:
+    #   https://confluence.eng.vmware.com/display/DECC/Getting+Started+with+DECC
+    # Example: For scdc1-staging cluster: my-simple-app.svc-stage.eng.vmware.com
+    - host: remote-teams-viewer.vela.decc.vmware.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: remote-teams-viewer-internal-service
+              port:
+                number: 80
+    - host: remote-teams-viewer.eng.vmware.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: remote-teams-viewer-internal-service
+              port:
+                number: 80
+
+---
+apiVersion: ako.vmware.com/v1alpha1
+kind: HostRule
+metadata:
+  name: remote-teams-viewer-internal-ingress-controller-host-rule
+  labels:
+    app: remote-teams-viewer-internal
+spec:
+  virtualhost:
+    # fqdn is a mandatory field and it must match the host in Ingress spec
+    # The domain also must match the appropriate DECC cluster.
+    fqdn: "remote-teams-viewer.vela.decc.vmware.com"
+    tls: # optional
+      sslKeyCertificate:
+        name: "decc-ssl-cert"
+        type: ref
+      termination: edge
