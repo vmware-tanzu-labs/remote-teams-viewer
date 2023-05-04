@@ -1,0 +1,7 @@
+Employee Name (FirstName LastName),Role (Designer/Engineer/Product Manager),Level (optional),Location (StateProvince),Timezone (PT/MT/CT/ET)
+Tony Stark,Designer,P1,Massachusetts,ET
+Peter Parker,Engineer,P2,California,PT
+Steven Strange,Product Manager,P3,Texas,CT
+Bruce Banner,Engineer,P4,New York,ET
+Steve Rogers,Designer,P5,Ontario,ET
+Natasha Romanov,PM,P3,British Columbia,PT
